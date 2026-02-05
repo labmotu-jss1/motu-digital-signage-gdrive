@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>MOTU Digital Signage</title>
-  <link rel="stylesheet" href="./css/layout.css?v=7" />
+  <link rel="stylesheet" href="./css/layout.css" />
 </head>
 
 <body>
@@ -13,6 +13,7 @@
   </header>
 
   <main id="container">
+    <!-- PANEL A : VIDEO -->
     <section id="panelA">
       <video
         id="panelAVideo"
@@ -24,18 +25,24 @@
       </video>
     </section>
 
+    <!-- PANEL B : INFO COLUMN -->
     <section id="panelB">
+
+      <!-- WEATHER WIDGET (REPLACES NEWS) -->
+      <div id="weatherWidgetBox">
+        <iframe
+          src="https://api.wo-cloud.com/content/widget/?geoObjectKey=42748473&language=en&region=US&timeFormat=HH:mm&windUnit=mph&systemOfMeasurement=imperial&temperatureUnit=fahrenheit"
+          scrolling="no"
+          frameborder="0">
+        </iframe>
       </div>
 
-      <div id="weatherBox">
-        <h2>Troy, MI Weather</h2>
-        <div id="weather">Loading...</div>
-      </div>
-
+      <!-- CALENDAR -->
       <div id="calendarBox">
         <h2>Upcoming Events</h2>
         <div id="calendarTrack">Loading calendar...</div>
       </div>
+
     </section>
   </main>
 
@@ -43,12 +50,9 @@
     <span id="tickerText">Loading...</span>
   </footer>
 
-  <!-- JS (cache-busted) -->
-  <script src="./js/clock.js?v=7"></script>
-  <script src="./js/news.js?v=7"></script>
-  <script src="./js/weather.js?v=7"></script>
-  <script src="./js/calendar.js?v=7"></script>
-  <script src="./js/ticker.js?v=7"></script>
+  <!-- JS -->
+  <script src="./js/clock.js"></script>
+  <script src="./js/calendar.js"></script>
+  <script src="./js/ticker.js"></script>
 </body>
 </html>
-
