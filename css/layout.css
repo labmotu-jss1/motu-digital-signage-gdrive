@@ -1,55 +1,64 @@
-/* ===== GLOBAL ===== */
+/* ================================
+   GLOBAL RESET
+================================ */
 * {
   box-sizing: border-box;
-}
-
-body {
   margin: 0;
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
   background: #000;
-  color: #eee;
-  overflow: hidden; /* signage safety */
-}
-
-/* ===== HEADER ===== */
-#topHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 24px;
-  background: #fff;
-  color: #1e40ff;
-  border-bottom: 3px solid #000;
-  z-index: 10;
-}
-
-#topHeader h1 {
-  margin: 0;
-  font-size: 34px;
-  font-weight: 700;
-}
-
-#clockBox {
-  background: #000;
-  color: #35ff90;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-weight: 600;
-}
-
-/* ===== MAIN LAYOUT ===== */
-#main {
-  display: flex;
-  height: calc(100vh - 130px);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
 }
 
-/* LEFT PANEL */
-#leftPanel {
-  width: 60%;
+/* ================================
+   HEADER (TITLE + CLOCK)
+================================ */
+header {
+  height: 70px;
+  padding: 10px 20px;
   background: #000;
-  position: relative;
-  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #222;
+}
+
+header h1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+#clock {
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+/* ================================
+   MAIN LAYOUT
+================================ */
+#container {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 130px); /* header + ticker */
+}
+
+/* ================================
+   PANEL A – VIDEO
+================================ */
+#panelA {
+  width: 65%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 #panelAVideo {
@@ -58,97 +67,94 @@ body {
   object-fit: cover;
 }
 
-/* RIGHT PANEL (CRITICAL FIX) */
-#rightPanel {
-  width: 40%;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  position: relative;
-  overflow: hidden;      /* ← HARD CLIP */
-  z-index: 2;
-}
-
-/* ===== CARDS ===== */
-.card {
-  background: #0b0b0b;   /* fully opaque */
-  border-radius: 10px;
-  overflow: hidden;      /* ← SECONDARY CLIP */
-  box-shadow: 0 0 0 1px #222;
-  display: flex;
-  flex-direction: column;
-}
-
-/* HEADERS */
-.cardHeader {
+/* ================================
+   PANEL B – INFO COLUMN
+================================ */
+#panelB {
+  width: 35%;
+  height: 100%;
+  padding: 15px;
+  overflow-y: auto;
   background: #000;
-  color: #fff;
-  padding: 10px 14px;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid #222;
-}
-
-/* NEWS */
-#newsBox {
-  padding: 10px 14px;
-  font-size: 14px;
-  line-height: 1.4;
-  height: 170px;
-  overflow: hidden;
-}
-
-/* WEATHER */
-#weatherBox {
-  padding: 10px 14px;
   display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  height: 70px;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* ===== CALENDAR (CONTAINED, NO BLEED) ===== */
+/* ================================
+   BOXES
+================================ */
+#newsBox,
+#weatherBox,
 #calendarBox {
-  flex: 1;
-  overflow: hidden;
-  padding: 6px 10px;
-  position: relative;
+  background: #0b0b0b;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+#newsBox h2,
+#weatherBox h2,
+#calendarBox h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
+
+/* ================================
+   NEWS
+================================ */
+#newsTrack {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* ================================
+   WEATHER
+================================ */
+#weather {
+  font-size: 16px;
+}
+
+/* ================================
+   CALENDAR
+================================ */
+#calendarBox {
+  max-height: 45%;
+  overflow-y: auto;
 }
 
 .calRow {
-  background: #111;
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #222;
 }
 
 .calDate {
-  font-size: 13px;
-  font-weight: 600;
-  color: #9ddcff;
+  font-size: 14px;
+  font-weight: bold;
+  color: #9fd3ff;
 }
 
 .calTitle {
-  font-size: 14px;
-  margin-top: 2px;
-  color: #fff;
+  font-size: 15px;
+  margin-top: 4px;
 }
 
-/* ===== TICKER ===== */
-#tickerBar {
-  height: 40px;
+/* ================================
+   TICKER
+================================ */
+#ticker {
+  height: 60px;
   background: #000;
-  border-top: 3px solid #111;
+  border-top: 2px solid #222;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
   overflow: hidden;
 }
 
 #tickerText {
-  padding-left: 100%;
   white-space: nowrap;
-  color: #fff;
-  font-size: 16px;
-  line-height: 40px;
+  font-size: 22px;
 }
