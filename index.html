@@ -1,66 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>MOTU Digital Signage</title>
-  <link rel="stylesheet" href="/css/layout.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/layout.css" />
 </head>
 
 <body>
+  <h1>MOTU Digital Signage</h1>
 
-<!-- HEADER -->
-<div id="topHeader">
-  <div id="headerTitle">MOTU Digital Signage</div>
-  <div id="clock"></div>
-</div>
-
-<!-- MAIN -->
-<div id="main">
-
-  <!-- PANEL A -->
-  <div id="panelA">
-    <video id="videoA" src="/panelA/panelA.mp4" autoplay muted loop></video>
-  </div>
-
-  <!-- RIGHT COLUMN -->
-  <div id="rightColumn">
-
-    <!-- NEWS -->
-    <div id="newsZone">
-      <div class="zoneHeader">Today's Top News</div>
-      <div id="newsViewport">
-        <div id="newsTrack">Loading news…</div>
-      </div>
+  <div id="container">
+    <div id="panelA">
+      <video
+        id="panelAVideo"
+        src="./panelA/panelA.mp4"
+        autoplay
+        muted
+        loop
+        playsinline>
+      </video>
     </div>
 
-    <!-- WEATHER -->
-    <div id="weatherZone">
-      <div class="zoneHeader">Troy, MI Weather</div>
-      <div id="weatherText">Loading…</div>
-    </div>
-
-    <!-- PANEL B -->
     <div id="panelB">
+      <div id="newsBox">
+        <h2>Today's Top News</h2>
+        <div id="newsTrack">Loading news...</div>
+      </div>
+
+      <div id="weatherBox">
+        <h2>Troy, MI Weather</h2>
+        <div id="weather">Loading...</div>
+      </div>
+
       <div id="calendarBox">
-        <div id="calendarHeader">Upcoming Events</div>
-        <div id="calendarTrack">Loading calendar…</div>
+        <h2>Upcoming Events</h2>
+        <div id="calendarTrack">Loading calendar...</div>
       </div>
     </div>
-
   </div>
-</div>
 
-<!-- TICKER -->
-<div id="ticker">
-  <div id="tickerText"></div>
-</div>
+  <div id="ticker">
+    <span id="tickerText">Loading...</span>
+  </div>
 
-<!-- SCRIPTS -->
-<script src="/js/news.js"></script>
-<script src="/js/weather.js"></script>
-<script src="/js/ticker.js"></script>
-<script src="/js/clock.js"></script>
-<script src="/js/calendar.js"></script>
-
+  <!-- JS (ALL RELATIVE PATHS) -->
+  <script src="./js/news.js"></script>
+  <script src="./js/weather.js"></script>
+  <script src="./js/calendar.js"></script>
+  <script src="./js/ticker.js"></script>
+  <script src="./js/clock.js"></script>
 </body>
 </html>
