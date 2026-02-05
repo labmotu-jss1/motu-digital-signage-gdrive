@@ -1,24 +1,39 @@
 (() => {
-  const track = document.getElementById("newsTrack");
-  if (!track) return;
+  const container = document.getElementById("newsTrack");
+  if (!container) return;
 
-  const NEWS_ENDPOINT =
-    "https://tight-frog-b4c7.lab-motu.workers.dev/news";
-
-  fetch(NEWS_ENDPOINT + "?t=" + Date.now(), { cache: "no-store" })
+  fetch("https://tight-frog-b4c7.lab-motu.workers.dev/news")
     .then(r => {
       if (!r.ok) throw new Error("News fetch failed");
       return r.text();
     })
     .then(xmlText => {
-      const xml = new DOMParser().parseFromString(xmlText, "text/xml");
-      const items = [...xml.querySelectorAll("item > title")].slice(0, 10);
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(xmlText, "application/xml");
+      const items = xml.querySelectorAll("item");
 
-      track.innerHTML = items
-        .map(i => `<div class="newsItem">• ${i.textContent}</div>`)
-        .join("");
+      if (!items.length) {
+        container.textContent = "No news available";
+        return;
+      }
+
+      container.innerHTML = "";
+
+      items.forEach((item, i) => {
+        if (i >= 5) return;
+
+        const title = item.querySelector("title")?.textContent;
+        if (!title) return;
+
+        const div = document.createElement("div");
+        div.style.marginBottom = "10px";
+        div.textContent = "• " + title;
+
+        container.appendChild(div);
+      });
     })
-    .catch(() => {
-      track.textContent = "News unavailable";
+    .catch(err => {
+      console.warn("News error:", err);
+      container.textContent = "News unavailable";
     });
 })();
