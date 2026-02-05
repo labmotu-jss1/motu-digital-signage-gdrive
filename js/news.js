@@ -2,9 +2,10 @@
   const track = document.getElementById("newsTrack");
   if (!track) return;
 
-  const NEWS_ENDPOINT = "http://localhost:9000/news";
+  const NEWS_ENDPOINT =
+    "https://tight-frog-b4c7.lab-motu.workers.dev/news";
 
-  fetch(NEWS_ENDPOINT, { cache: "no-store" })
+  fetch(NEWS_ENDPOINT + "?t=" + Date.now(), { cache: "no-store" })
     .then(r => {
       if (!r.ok) throw new Error("news fetch failed");
       return r.text();
