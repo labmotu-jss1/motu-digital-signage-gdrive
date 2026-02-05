@@ -166,3 +166,11 @@ header h1 {
   font-size: 22px;
   white-space: nowrap;
 }
+@keyframes tickerScroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
