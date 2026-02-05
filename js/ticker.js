@@ -1,10 +1,13 @@
 (() => {
   const el = document.getElementById("tickerText");
+  if (!el) return;
 
-  fetch("TextTicker.txt?ts=" + Date.now())
-    .then(r => r.text())
+  fetch("/motu-digital-signage/TextTicker.txt?ts=" + Date.now())
+    .then(r => {
+      if (!r.ok) throw new Error("Ticker fetch failed");
+      return r.text();
+    })
     .then(text => {
-      // Strip ALL HTML tags if server returns an error page
       const clean = text
         .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
         .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
@@ -17,10 +20,10 @@
 
       // Restart animation cleanly
       el.style.animation = "none";
-      el.offsetWidth;
-      el.style.animation = "tickerScroll 25s linear infinite";
+      el.offsetWidth; // force reflow
+      el.style.animation = "tickerScroll 30s linear infinite";
     })
-    .catch(() => {
-      // If fetch fails, keep ticker empty
+    .catch(err => {
+      console.warn("Ticker error:", err);
     });
 })();
