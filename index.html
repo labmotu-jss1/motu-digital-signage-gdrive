@@ -3,56 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <title>MOTU Digital Signage</title>
-  <link rel="stylesheet" href="./css/layout.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/layout.css" />
+
+  <!-- Scripts -->
+  <script defer src="js/clock.js"></script>
+  <script defer src="js/calendar.js"></script>
+  <script defer src="js/ticker.js"></script>
 </head>
 
 <body>
-  <header>
-    <h1>MOTU Digital Signage</h1>
+
+  <!-- ================= HEADER ================= -->
+  <div id="header">
+    <div id="title">MOTU Digital Signage</div>
     <div id="clock"></div>
-  </header>
+  </div>
 
-  <main id="container">
-    <!-- PANEL A : VIDEO -->
-    <section id="panelA">
-      <video
-        id="panelAVideo"
-        src="./panelA/panelA.mp4"
-        autoplay
-        muted
-        loop
-        playsinline>
-      </video>
-    </section>
+  <!-- ================= MAIN CONTENT ================= -->
+  <div id="content">
 
-    <!-- PANEL B : INFO COLUMN -->
-    <section id="panelB">
+    <!-- ========== PANEL A (GOOGLE DRIVE VIDEO) ========== -->
+    <!--
+      NOTE:
+      This is the ONLY intentional change in this file.
+      Panel A now loads content from Google Drive via iframe.
+      Replace-file workflow controls content.
+    -->
+    <div id="panelA">
+      <iframe
+        src="https://drive.google.com/file/d/1bN1-Io7V4zggxg24vVgPr1ChEJIOreHo/preview"
+        allow="autoplay"
+        allowfullscreen
+        style="width:100%; height:100%; border:0;">
+      </iframe>
+    </div>
 
-      <!-- WEATHER WIDGET (REPLACES NEWS) -->
-      <div id="weatherWidgetBox">
+    <!-- ========== PANEL B (WEATHER + CALENDAR) ========== -->
+    <div id="panelB">
+
+      <!-- Weather Widget -->
+      <div id="weather">
         <iframe
           src="https://api.wo-cloud.com/content/widget/?geoObjectKey=42748473&language=en&region=US&timeFormat=HH:mm&windUnit=mph&systemOfMeasurement=imperial&temperatureUnit=fahrenheit"
+          width="290"
+          height="318"
+          frameborder="0"
           scrolling="no"
-          frameborder="0">
+          style="border:1px solid #10658E; border-radius:8px;">
         </iframe>
       </div>
 
-      <!-- CALENDAR -->
-      <div id="calendarBox">
-        <h2>Upcoming Events</h2>
-        <div id="calendarTrack">Loading calendar...</div>
+      <!-- Calendar -->
+      <div id="calendar">
+        <ul id="calendarList"></ul>
       </div>
 
-    </section>
-  </main>
+    </div>
+  </div>
 
-  <footer id="ticker">
-    <span id="tickerText">Loading...</span>
-  </footer>
+  <!-- ================= FOOTER / TICKER ================= -->
+  <div id="footer">
+    <div id="ticker"></div>
+  </div>
 
-  <!-- JS -->
-  <script src="./js/clock.js"></script>
-  <script src="./js/calendar.js"></script>
-  <script src="./js/ticker.js"></script>
+  <!-- ================= AUTO REFRESH ================= -->
+  <script>
+    // Appliance-style refresh to pick up Drive content updates
+    setInterval(() => {
+      location.reload();
+    }, 300000); // 5 minutes
+  </script>
+
 </body>
 </html>
